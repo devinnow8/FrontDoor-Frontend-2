@@ -1,30 +1,15 @@
 import './App.css';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import ExtensionToggle from './components/ExtensionToggle';
 import Signup from './components/SignUp';
 import Signin from './components/SignIn';
 import History from './components/History';
 import AuthProvider from './components/AuthProvider';
 
-export type Page = 'Signin' | 'Signup' | 'History';
+export type CurrentPage = 'Signin' | 'Signup' | 'History';
 
 function App() {
-	const [currentPage, setCurrentPage] = useState<Page>('Signin');
-
-	const getComponent = (currentPage: Page) => {
-		switch (currentPage) {
-			case 'Signin':
-				return Signin;
-			case 'Signup':
-				return Signup;
-			case 'History':
-				return History;
-			default:
-				return Signin;
-		}
-	};
-
-	const Component = useMemo(() => getComponent(currentPage), [currentPage]);
+	const [currentPage, setCurrentPage] = useState<CurrentPage>('Signin');
 
 	return (
 		<AuthProvider setCurrentPage={setCurrentPage}>
@@ -35,7 +20,15 @@ function App() {
 						<ExtensionToggle />
 					</div>
 				</div>
-				<Component onSetCurrentPage={setCurrentPage} />
+				{currentPage === 'Signin' && (
+					<Signin onSetCurrentPage={setCurrentPage} />
+				)}
+				{currentPage === 'Signup' && (
+					<Signup onSetCurrentPage={setCurrentPage} />
+				)}
+				{currentPage === 'History' && (
+					<History onSetCurrentPage={setCurrentPage} />
+				)}
 			</div>
 		</AuthProvider>
 	);

@@ -52,10 +52,10 @@ const loginReducer = (state: LoginState, action: LoginAction): LoginState => {
 	}
 };
 
-type Page = 'Signin' | 'Signup' | 'History';
+type CurrentPage = 'Signin' | 'Signup' | 'History';
 
 interface SigninPropsType {
-	onSetCurrentPage: (input: Page) => void;
+	onSetCurrentPage: (input: CurrentPage) => void;
 }
 
 const initialState: LoginState = {
