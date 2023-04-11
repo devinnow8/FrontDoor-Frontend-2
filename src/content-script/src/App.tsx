@@ -36,25 +36,26 @@ function App() {
   }, []);
 
   const messageApi = (text: string) => {
-    try {
-      chrome.storage.sync.get("userDetail", async (data) => {
-        setIsLoading(true);
-        let payload = JSON.stringify({
-          text: text,
-          id: data?.userDetail?.id,
-        });
-
-        const response = await BaseAPI.post("openai", payload, {
-          headers: { "Content-Type": "application/json" },
-        });
-        if (response?.data?.data?.statusCode === 200) {
-          setAiText(response.data.data.text);
-          setIsLoading(false);
-        }
+    chrome.storage.sync.get("userDetail", (data) => {
+      setIsLoading(true);
+      let payload = JSON.stringify({
+        text: text,
+        id: data?.userDetail?.id,
       });
-    } catch (error: any) {
-      setIsLoading(false);
-    }
+
+      BaseAPI.post("openai", payload, {
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response: any) => {
+          if (response?.data?.statusCode === 200) {
+            setAiText(response.data.text);
+            setIsLoading(false);
+          }
+        })
+        .catch((error: any) => {
+          setIsLoading(false);
+        });
+    });
   };
   const closePopUp = () => {
     document !== null &&

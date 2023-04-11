@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
-import BaseAPI from '../Api/BaseAPI';
-import { CurrentPage } from '../App';
-import AuthContext from '../context/AuthContext';
+import { useEffect, useState } from "react";
+import BaseAPI from "../Api/BaseAPI";
+import { CurrentPage } from "../App";
+import AuthContext from "../context/AuthContext";
 
 type UserType = {
-	username: String;
-	accessToken: String;
-	id: String;
-	refreshToken: String;
+  username: String;
+  accessToken: String;
+  id: String;
+  refreshToken: String;
 };
 
 type AuthProviederPropsType = {
-	children: React.ReactNode;
-	setCurrentPage: (CurrentPage: CurrentPage) => void;
+  children: React.ReactNode;
+  setCurrentPage: (CurrentPage: CurrentPage) => void;
 };
 
 function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
-	const [user, setUser] = useState<UserType>({
-		username: '',
-		accessToken: '',
-		id: '',
-		refreshToken: '',
-	});
+  const [user, setUser] = useState<UserType>({
+    username: "",
+    accessToken: "",
+    id: "",
+    refreshToken: "",
+  });
 
   useEffect(() => {
     chrome.storage.sync.get("userDetail", async (data) => {
@@ -33,53 +33,52 @@ function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
     });
   }, []);
 
-	const handleSignIn = async (email: String, password: String) => {
-		try {
-			let data = JSON.stringify({
-				username: email,
-				password,
-			});
+  const handleSignIn = (email: String, password: String) => {
+    let data = JSON.stringify({
+      username: email,
+      password,
+    });
 
-      let response = await BaseAPI.post("auth/sign-in", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+    BaseAPI.post("auth/sign-in", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response: any) => {
+        chrome.storage.sync.set({ userDetail: response.data });
+        setUser({ username: email, ...response?.data });
+        setCurrentPage("History");
+      })
+      .catch((error: any) => {
+        console.log("signin error: ", error);
       });
-      console.log("signin: ", response.data.data);
-      chrome.storage.sync.set({ userDetail: response.data.data });
-      setUser({ username: email, ...response?.data?.data });
-      setCurrentPage("History");
-    } catch (error) {
-      console.log("signin error: ", error);
-    }
   };
 
-	const handleSignUp = async (
-		email: String,
-		password: String,
-		name: String
-	) => {
-		try {
-			let data = JSON.stringify({
-				username: email,
-				password,
-				name,
-			});
+  const handleSignUp = (email: String, password: String, name: String) => {
+    let data = JSON.stringify({
+      username: email,
+      password,
+      name,
+    });
 
-			let response = await BaseAPI.post('auth/sign-up', data, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			setUser({ username: email, name, ...response?.data?.data });
-		} catch (error) {}
-	};
+    BaseAPI.post("auth/sign-up", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response: any) => {
+        setUser({ username: email, name, ...response?.data });
+      })
+      .catch((error: any) => {
+        console.log("error:", error);
+      });
+  };
 
-	return (
-		<AuthContext.Provider value={{ user, handleSignIn, handleSignUp }}>
-			{children}
-		</AuthContext.Provider>
-	);
+  return (
+    <AuthContext.Provider value={{ user, handleSignIn, handleSignUp }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export default AuthProvider;

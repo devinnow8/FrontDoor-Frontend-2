@@ -1,28 +1,23 @@
-import axios from 'axios';
+import axios from "axios";
 
-let baseUrl = 'http://localhost:3000/';
-const response = (data: any, error: any) => ({ data, error });
+let baseUrl = "http://localhost:3000/";
 
 async function post(endpointURL: any, data: any, config: any) {
-	try {
-		const serverResponse = await axios.post(
-			`${baseUrl}${endpointURL}`,
-			data,
-			config
-		);
-		return response(serverResponse, '');
-	} catch (error: any) {
-		return response('', error.message);
-	}
+  return new Promise(async (resolve) => {
+    const response = await axios.post(`${baseUrl}${endpointURL}`, data, config);
+    if (response) {
+      resolve(response);
+    }
+  });
 }
 
 async function get(endpointURL: any, config: any) {
-	try {
-		const serverResponse = await axios.get(`${baseUrl}${endpointURL}`, config);
-		return response(serverResponse, '');
-	} catch (error: any) {
-		return response('', error.message);
-	}
+  return new Promise(async (resolve) => {
+    const response = await axios.get(`${baseUrl}${endpointURL}`, config);
+    if (response) {
+      resolve(response);
+    }
+  });
 }
 
 export default { post, get };
