@@ -24,10 +24,10 @@ function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
   });
 
   useEffect(() => {
-    chrome.storage.sync.get("userData", async (data) => {
-      console.log("data.userData: ", data);
-      setUser(data.userData);
-      if (!!data.userData.id) {
+    chrome.storage.sync.get("userDetail", async (data) => {
+      console.log("data.userDetail: ", data);
+      setUser(data.userDetail);
+      if (!!data.userDetail.id) {
         setCurrentPage("History");
       }
     });
@@ -46,7 +46,7 @@ function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
         },
       });
       console.log("signin: ", response.data.data);
-      chrome.storage.sync.set({ userData: response.data.data });
+      chrome.storage.sync.set({ userDetail: response.data.data });
       setUser({ username: email, ...response?.data?.data });
       setCurrentPage("History");
     } catch (error) {

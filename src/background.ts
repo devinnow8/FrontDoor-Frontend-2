@@ -8,12 +8,11 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-const addTooltipDiv = () => {
+const createTooltipDiv = () => {
   const selection = window.getSelection();
   if (selection && selection.rangeCount > 0) {
     const range = selection.getRangeAt(0);
     const boundingRect = range.getBoundingClientRect();
-    console.log(boundingRect, "boundingRect");
 
     const message = {
       type: "selectedText",
@@ -23,35 +22,30 @@ const addTooltipDiv = () => {
         left: boundingRect.left + window.pageXOffset,
       },
     };
-
     let tooltipElement: HTMLElement;
 
     // Create a new tooltip element
     tooltipElement = document.createElement("div");
-    tooltipElement.id = "tmp-chrome-ext";
+    tooltipElement.id = "tolltip_box_ext";
     tooltipElement.style.position = "absolute";
     tooltipElement.style.top =
       message.position.top - tooltipElement.offsetHeight + 25 + "px";
     tooltipElement.style.left = message.position.left + "px";
     tooltipElement.style.zIndex = "9999";
 
-    console.log(
-      message.position,
-      "message.position",
-      tooltipElement.offsetHeight
-    );
-
     // Add the tooltip element to the document
-    document.body.prepend(tooltipElement);
+    if (!document.getElementById("tolltip_box_ext")) {
+      document.body.prepend(tooltipElement);
+    }
   }
 };
 
 chrome.contextMenus.onClicked.addListener(async (info) => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-
+  const tabId = tabs[0].id || 0;
   await chrome.scripting.executeScript({
-    target: { tabId: tabs[0].id || 0 },
-    func: addTooltipDiv,
+    target: { tabId },
+    func: createTooltipDiv,
   });
   await chrome.scripting.executeScript(
     {
