@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import ExtensionToggle from './components/ExtensionToggle';
+import ToggleButton from './components/ToggleButton';
 import Signup from './components/SignUp';
 import Signin from './components/SignIn';
 import History from './components/History';
@@ -17,7 +17,7 @@ function App() {
 				<div className="ext_main_div">
 					<div className="toggle">
 						<p>Frontdoor extension</p>
-						<ExtensionToggle />
+						<ToggleButton />
 					</div>
 				</div>
 				{currentPage === 'Signin' && (

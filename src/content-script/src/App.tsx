@@ -37,11 +37,11 @@ function App() {
 
   const messageApi = (text: string) => {
     try {
-      chrome.storage.sync.get("userData", async (data) => {
+      chrome.storage.sync.get("userDetail", async (data) => {
         setIsLoading(true);
         let payload = JSON.stringify({
           text: text,
-          id: data?.userData?.id,
+          id: data?.userDetail?.id,
         });
 
         const response = await BaseAPI.post("openai", payload, {
@@ -58,8 +58,8 @@ function App() {
   };
   const closePopUp = () => {
     document !== null &&
-      document.getElementById("tmp-chrome-ext") &&
-      document.getElementById("tmp-chrome-ext")?.remove();
+      document.getElementById("tolltip_box_ext") &&
+      document.getElementById("tolltip_box_ext")?.remove();
   };
 
   return (

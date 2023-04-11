@@ -13,10 +13,9 @@
 //       },
 //     };
 
-
 //     // Create a new tooltip element
 //     const divElement = document.createElement("div");
-//     divElement.id = "tmp-chrome-ext";
+//     divElement.id = "tolltip_box_ext";
 //     divElement.style.position = "absolute";
 //     divElement.style.top = message.position.top - divElement.offsetHeight + 25 + "px";
 //     divElement.style.left = message.position.left + "px";
@@ -35,12 +34,11 @@
 //   }
 // }, false);
 
-
 // // Close the bubble when we click on the screen.
 // document.addEventListener('mousedown', function (e) {
-//   const element =  document.getElementById("tmp-chrome-ext");
+//   const element =  document.getElementById("tolltip_box_ext");
 //   if (element) {
 //     element.style.visibility = 'hidden';
 //   }
 // }, false);
-export {}
+export {};

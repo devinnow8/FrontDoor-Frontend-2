@@ -23,15 +23,15 @@ function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
 		refreshToken: '',
 	});
 
-	useEffect(() => {
-		chrome.storage.sync.get('userData', async (data) => {
-			console.log('data.userData: ', data);
-			setUser(data.userData);
-			if (!!data.userData.id) {
-				setCurrentPage('History');
-			}
-		});
-	}, []);
+  useEffect(() => {
+    chrome.storage.sync.get("userDetail", async (data) => {
+      console.log("data.userDetail: ", data);
+      setUser(data.userDetail);
+      if (!!data.userDetail.id) {
+        setCurrentPage("History");
+      }
+    });
+  }, []);
 
 	const handleSignIn = async (email: String, password: String) => {
 		try {
@@ -40,19 +40,19 @@ function AuthProvider({ children, setCurrentPage }: AuthProviederPropsType) {
 				password,
 			});
 
-			let response = await BaseAPI.post('auth/sign-in', data, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			console.log('signin: ', response.data.data);
-			chrome.storage.sync.set({ userData: response.data.data });
-			setUser({ username: email, ...response?.data?.data });
-			setCurrentPage('History');
-		} catch (error) {
-			console.log('signin error: ', error);
-		}
-	};
+      let response = await BaseAPI.post("auth/sign-in", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("signin: ", response.data.data);
+      chrome.storage.sync.set({ userDetail: response.data.data });
+      setUser({ username: email, ...response?.data?.data });
+      setCurrentPage("History");
+    } catch (error) {
+      console.log("signin error: ", error);
+    }
+  };
 
 	const handleSignUp = async (
 		email: String,
