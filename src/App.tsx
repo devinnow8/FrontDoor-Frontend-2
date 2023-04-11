@@ -31,7 +31,7 @@ function App() {
 			<div className="app">
 				<div className="ext_main_div">
 					<div className="toggle">
-						<p>Frontdoor chrome extension</p>
+						<p>Frontdoor extension</p>
 						<ExtensionToggle />
 					</div>
 				</div>

@@ -102,9 +102,6 @@ const Signup: React.FC<SignupPropsType> = ({
 					<form className="form" onSubmit={onSubmit}>
 						{error && <p className="error">{error}</p>}
 						<div className="signup-details">
-							<div className="form-label">
-								<label>Name</label>
-							</div>
 							<div>
 								<input
 									value={name}
@@ -123,9 +120,6 @@ const Signup: React.FC<SignupPropsType> = ({
 							</div>
 						</div>
 						<div className="signup-details">
-							<div className="form-label">
-								<label>Email</label>
-							</div>
 							<input
 								onChange={(e) =>
 									dispatch({
@@ -142,9 +136,6 @@ const Signup: React.FC<SignupPropsType> = ({
 							/>
 						</div>
 						<div className="signup-details">
-							<div className="form-label">
-								<label>Password</label>
-							</div>
 							<input
 								onChange={(e) =>
 									dispatch({
@@ -161,9 +152,6 @@ const Signup: React.FC<SignupPropsType> = ({
 							/>
 						</div>
 						<div className="signup-details">
-							<div className="form-label">
-								<label>Repeat Password</label>
-							</div>
 							<input
 								onChange={(e) =>
 									dispatch({
@@ -187,14 +175,12 @@ const Signup: React.FC<SignupPropsType> = ({
 							Sign Up
 						</button>
 					</form>
-					<p>
+					<p className='small-text'>
 						Already have an account?
 						<a
 							href="#"
-							style={{ color: 'dodgerblue' }}
 							onClick={handleNavigateToSignup}
 						>
-							{' '}
 							Login
 						</a>
 					</p>

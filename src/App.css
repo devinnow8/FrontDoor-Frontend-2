@@ -4,27 +4,35 @@
 }
 body {
   font-family: 'Poppins', sans-serif;
+  margin: 0;
 }
 .signup-details {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .already-account a{
   color: #FB641B;
   cursor: pointer;
 }
-.signup_form {
-  padding: 20px;
-}
 .signup_form .primary-solid{
-margin-top: 30px;
+  margin-top: 15px;
 }
 .app{
-  width: 500px;
+  width: 400px;
+  padding: 20px;
 }
 .sub-title{
   font-size: 14px;
+    color: #888888;
+    font-weight: normal;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.small-text{
+  text-align: center;
+}
+.small-text a{
+  color: #808080;
+  margin: 0px 5px;
 }
 .title{
   font-size: 30px;
@@ -37,22 +45,24 @@ margin-top: 30px;
 margin-left: 15px;
 }
 .primary-solid {
-  background-color: #FB641B;
-  color:rgb(255, 255, 255);
+  background-color: #7d43e2;
+  color: rgb(255, 255, 255);
   border: unset;
   font-size: 14px;
   width: 180px;
   padding: 1rem;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
   border-radius: 5px;
+  width: 100%;
+  border-radius: 15px;
 }
 .signup-details input {
-  height: 40px;
+  height: 50px;
   border: 1px solid #e3e3e3;
   padding: 3px 10px;
   font-size: 13px;
-  width: 300px;
-  border-radius: 3px;
+  width: 100%;
+  border-radius: 15px;
 }
 .form-label {
   flex: 1;
@@ -71,6 +81,7 @@ margin-left: 15px;
   font-size: 13px;
   font-weight: 500;
   margin: 0;
+  color: #888888;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -135,9 +146,6 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-.history-page{
-  padding: 20px;
 }
 .history-details{
   border-bottom: 1px solid #cfcfcf;
