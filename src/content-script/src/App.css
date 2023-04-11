@@ -42,16 +42,17 @@
   color: #000;
   max-width: 500px;
   box-shadow: 0px 0px 14px rgba(0,0,0,0.28);
-  padding: 28px;
+  padding: 20px;
   text-align: center;
   border-radius: 4px;
   position: relative;
 }
 .tooltip-box .close-icon {
   position: absolute;
-  right: 12px;
-  top: 10px;
-  width: 20px;
+  right: 7px;
+  top: 7px;
+  width: 12px;
+  cursor: pointer;
 }
 .tooltip-box .text {
   color: #686868;
@@ -61,12 +62,12 @@
   font-weight: 400;
 }
 .loader {
-  border: 5px solid #f3f3f3;
+  border: 3px solid #dbdbdb;
   border-radius: 50%;
-  border-top: 5px solid #3498db;
+  border-top: 3px solid #7d43e1;
   width: 30px;
   height: 30px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
 

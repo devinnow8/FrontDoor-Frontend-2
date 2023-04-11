@@ -47,12 +47,12 @@ const History: React.FC<HistoryPropsType> = ({}: HistoryPropsType) => {
     <>
       <div className="history-page">
         <h1 className="title">History</h1>
-        {history.map(({ reply, text }: any) => (
+        {history.map(({ textResponse, userText }: any) => (
           <div className="history-details">
             <div className="history-time">
-              <span>Title: {text}</span>
+              <span>Title: {userText}</span>
             </div>
-            <p>{reply}</p>
+            <p>{textResponse}</p>
           </div>
         ))}
       </div>
